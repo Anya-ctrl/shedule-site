@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Main page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <%- include('./partials/header') %>
+
+    <main class="main">
+        <section class="criteria" id="criteria">
+            <div class="container">
+                <h2 class="criteria__title">
+                    Оберіть критерії
+                </h2>
+        
+                <div class="criteria__selection">
+        
+                    <div class="selection-block" id="facultySelect">
+                        <div class="select__header">
+                            <span class="select__current">Факультет</span>
+                            <button type="button" class="select__icon">
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </div>
+                        <div class="select__body">
+                            <% faculty.forEach((faculty) => { %>
+                                <div class="select__item"><%= faculty.name %></div>
+                            <% }); %>
+                        </div>
+                    </div>
+
+                    <div class="selection-block" id="specialitySelect">
+                        <div class="select__header">
+                            <span class="select__current">Спеціальність</span>
+                            <button type="button" class="select__icon">
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </div>
+                        <div class="select__body">
+                            <% speciality.forEach((speciality) => { %>
+                                <div class="select__item"><%= speciality.name %></div>
+                            <% }); %>
+                        </div>
+                    </div>
+
+                    <div class="selection-block" id="courseSelect">
+                        <div class="select__header">
+                            <span class="select__current">Курс</span>
+                            <button type="button" class="select__icon">
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </div>
+                        <div class="select__body">
+                            <% course.forEach((course) => { %>
+                                <div class="select__item"><%= course.name %></div>
+                            <% }); %>
+                        </div>
+                    </div>
+
+                    <div class="selection-block" id="groupSelect">
+                        <div class="select__header">
+                            <span class="select__current">Група</span>
+                            <button type="button" class="select__icon">
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </div>
+                        <div class="select__body">
+                            <% group.forEach((group) => { %>
+                                <div class="select__item"><%= group.name %></div>
+                            <% }); %>
+                        </div>
+                    </div>
+        
+                </div>
+        
+                <div class="button">
+                    <a href="/shedule">Перейти до розкладу</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

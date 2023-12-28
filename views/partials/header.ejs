@@ -1,0 +1,41 @@
+<header class="header">
+    <div class="header-container">
+        <div class="header__inner">
+            <a href="../" class="logo">
+                <img class="logo__link" src="images/logo.svg" alt="logo">
+            </a>
+            <nav class="menu">
+                <ul class="menu__list">
+                    <li class="menu__item">
+                        <a class="menu__list-link" href="../registration">Реєстрація</a>
+                    </li>
+                    <li class="menu__item">
+                        <a class="menu__list-link" href="../entry">Вхід</a>
+                    </li>
+                    <li class="menu__item menu-student">
+                        <img class="menu__list-link" src="images/profile.svg" alt="profile">
+                        <div class="student-menu">
+                            <div class="student-menu__title">Гість</div>
+                            <ul class="student-menu__list">
+                                <li class="student-menu__item">
+                                    <a href="../shedule" class="student-menu__link"><span>Розклад занять</span></a>
+                                </li>
+                                <li class="student-menu__item">
+                                    <a href="../professors" class="student-menu__link"><span>Контакти викладачів</span></a>
+                                </li>
+                                <li class="student-menu__item">
+                                    <a href="../feedback" class="student-menu__link"><span>Служба підтримки</span></a>
+                                </li>
+                                <% if (isLoggedIn) { %>
+                                    <li class="student-menu__item">
+                                        <a href="#logout" class="student-menu__link"><span>Вийти</span></a>
+                                    </li>
+                                <% } %>
+                            </ul>
+                        </div> 
+                    </li>
+                </ul>  
+            </nav>
+        </div>
+    </div>
+</header>

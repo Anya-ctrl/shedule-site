@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registratiion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <% include ./partials/header %>
+
+    <main class="main">
+        <section class="registration" id="registration" style="display: none;">
+            <div class="container">
+                <h2 class="registration__title">
+                    Реєстрація
+                </h2>
+        
+                <form id="registrationForm" method="POST" action="/register">
+                    <div class="registration-block">
+                        <div class="registration-block__item">
+                            <label for="registrationName" class="registration-block__text">Ім’я</label>
+                            <input type="text" name="name" id="registrationName" placeholder="Ім'я" required>
+                        </div>
+        
+                        <div class="registration-block__item">
+                            <label for="registrationPassword" class="registration-block__text">Пароль</label>
+                            <input type="password" name="password" id="registrationPassword" placeholder="Пароль" required>
+                        </div>
+        
+                        <div class="registration-block__item">
+                            <label for="registrationSurname" class="registration-block__text">Прізвище</label>
+                            <input type="text" name="surname" id="registrationSurname" placeholder="Прізвище" required>
+                        </div>
+        
+                        <div class="registration-block__item">
+                            <label for="registrationPasswordConfirm" class="registration-block__text">Підтвердіть пароль</label>
+                            <input type="password" name="passwordConfirm" id="registrationPasswordConfirm" placeholder="Підтвердіть пароль" required>
+                        </div>
+        
+                        <div class="registration-block__item">
+                            <label for="registrationEmail" class="registration-block__text">E-mail</label>
+                            <input type="email" name="email" id="registrationEmail" placeholder="E-mail" required>
+                        </div>
+                    </div>
+        
+                    <button type="submit" class="button">Зареєструватися</button>
+                </form>
+        
+                <div class="registration__text">Вже зареєстровані? 
+                    <a href="/entry">Нажміть сюди.</a>
+                </div>
+            </div>
+        </section>        
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
