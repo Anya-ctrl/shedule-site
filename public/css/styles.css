@@ -58,6 +58,14 @@ body{
     transition: all 0.5s ease;
     cursor: pointer;    
     box-shadow: 0px 5px 5px #7c568b;
+    font-size: 24px;
+    color: #fff;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.button a{
+    color: #fff;
 }
 
 .button:active{
@@ -227,7 +235,10 @@ body{
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-wrap: wrap;
+    font-size: 14px;
     font-weight: 700;
+    width: 220px;
 }
 
 .select__icon{
@@ -344,9 +355,6 @@ body{
 
 .registration-block__input{
     width: 100%;
-}
-
-.registration-block__input input{
     width: 100%;
     height: 50px;
     padding: 8px 16px;

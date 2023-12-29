@@ -1,20 +1,37 @@
-const express = require('express');
-const router = express.Router();
+import { Router } from 'express';
+const router = Router();
 
-const indexController = require('../controllers/indexController');
-const entryController = require('../controllers/entryController');
-const feedbackController = require('../controllers/feedbackController');
-const professorsController = require('../controllers/professorsController');
-const registrationController = require('../controllers/registrationController');
-const sheduleController = require('../controllers/sheduleController');
+import { getIndexPage, getEntryPage, getFeedbackPage, getProfessorsPage, getRegistrationPage, getSchedulePage } from '../controllers/indexController.js';
 
+// Логирование для каждого маршрута
+router.get('/', (req, res, next) => {
+    console.log('Получен запрос на главную страницу');
+    getIndexPage(req, res, next);
+});
 
-// Обработчики маршрутов для разных страниц
-router.get('/', indexController.getIndexPage);
-router.get('/entry', entryController.getIndexPage);
-router.get('/feedback', feedbackController.getIndexPage);
-router.get('/professors', professorsController.getIndexPage);
-router.get('/registration', registrationController.getIndexPage);
-router.get('/shedule', sheduleController.getIndexPage);
+router.get('/entry', (req, res, next) => {
+    console.log('Получен запрос на страницу входа');
+    getEntryPage(req, res, next);
+});
 
-module.exports = router;
+router.get('/feedback', (req, res, next) => {
+    console.log('Получен запрос на страницу обратной связи');
+    getFeedbackPage(req, res, next);
+});
+
+router.get('/professors', (req, res, next) => {
+    console.log('Получен запрос на страницу с преподавателями');
+    getProfessorsPage(req, res, next);
+});
+
+router.get('/registration', (req, res, next) => {
+    console.log('Получен запрос на страницу регистрации');
+    getRegistrationPage(req, res, next);
+});
+
+router.get('/shedule', (req, res, next) => {
+    console.log('Получен запрос на страницу расписания');
+    getSchedulePage(req, res, next);
+});
+
+export default router;

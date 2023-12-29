@@ -1,5 +1,6 @@
-const { Sequelize, DataTypes } = require('sequelize');
-require('dotenv').config();
+import { Sequelize, DataTypes } from 'sequelize';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.env.DB_PASSWORD, {
   host: process.env.DB_HOST,
@@ -37,4 +38,4 @@ const Monday = sequelize.define('monday', {
   timestamps: false
 });
 
-module.exports = Monday;
+export default Monday;

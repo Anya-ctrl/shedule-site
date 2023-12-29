@@ -1,7 +1,7 @@
-const express = require('express');
-const router = express.Router();
-const userController = require('../controllers/userController');
-const { body, validationResult } = require('express-validator');
+import { Router } from 'express';
+const router = Router();
+import { registerUser, loginUser } from '../controllers/userController.js';
+import { body, validationResult } from 'express-validator';
 
 // Валидация данных при регистрации
 router.post(
@@ -12,7 +12,7 @@ router.post(
         body('name').isLength({ min: 2 }),
         body('surname').isLength({ min: 2 }),
     ],
-    userController.registerUser
+    registerUser
 );
 
 // Маршрут для страницы входа (GET)
@@ -21,6 +21,6 @@ router.get('/entry', (req, res) => {
 });
 
 // Маршрут для обработки входа (POST)
-router.post('/login', userController.loginUser);
+router.post('/login', loginUser);
 
-module.exports = router;
+export default router;

@@ -1,24 +1,24 @@
-const Course = require('./course');
-const Faculty = require('./faculty');
-const Group = require('./group');
-const Professor = require('./professor');
-const Speciality = require('./speciality');
-const Student = require('./student');
-const Monday = require('./monday');
-const Tuesday = require('./tuesday');
-const Wednesday = require('./wednesday');
-const Thursday = require('./thursday');
-const Friday = require('./friday');
-const Saturday = require('./saturday');
-const User = require('./user');
-const Feedback = require('./feedback');
+import Course from './course.js';
+import Faculty from './faculty.js';
+import Group from './group.js';
+import Professor from './professor.js';
+import Speciality from './speciality.js';
+import Student from './student.js';
+import Monday from './monday.js';
+import Tuesday from './tuesday.js';
+import Wednesday from './wednesday.js';
+import Thursday from './thursday.js';
+import Friday from './friday.js';
+import Saturday from './saturday.js';
+import User from './user.js';
+import Feedback from './feedback.js';
 
-module.exports = {
-    Course,
+export default {
     Faculty,
+    Speciality,
+    Course,
     Group,
     Professor,
-    Speciality,
     Student,
     Monday,
     Tuesday,

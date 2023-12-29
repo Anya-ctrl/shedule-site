@@ -1,6 +1,6 @@
-const User = require('../models/user');
+import User from '../models/user.js';
 
-exports.registerUser = async (req, res) => {
+export async function registerUser(req, res) {
     try {
         const { email, password, name, surname } = req.body;
         const newUser = await User.create({ email, password, name, surname });
@@ -8,9 +8,9 @@ exports.registerUser = async (req, res) => {
     } catch (error) {
         res.status(500).send('Registration failed');
     }
-};
+}
 
-exports.loginUser = (req, res) => {
+export function loginUser(req, res) {
     const { email, password } = req.body; // Получаем данные из формы
 
     User.findOne({ where: { email } })
@@ -26,4 +26,4 @@ exports.loginUser = (req, res) => {
             console.error('Ошибка при поиске пользователя:', error);
             res.status(500).send('Ошибка аутентификации');
         });
-};
+}

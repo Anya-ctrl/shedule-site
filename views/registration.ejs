@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <% include ./partials/header %>
+    <%- include('./partials/header') %>
 
     <main class="main">
-        <section class="registration" id="registration" style="display: none;">
+        <section class="registration" id="registration">
             <div class="container">
                 <h2 class="registration__title">
                     Реєстрація
@@ -25,27 +25,27 @@
                     <div class="registration-block">
                         <div class="registration-block__item">
                             <label for="registrationName" class="registration-block__text">Ім’я</label>
-                            <input type="text" name="name" id="registrationName" placeholder="Ім'я" required>
+                            <input type="text" name="name" id="registrationName" class="registration-block__input" placeholder="Ім'я" required>
                         </div>
         
                         <div class="registration-block__item">
                             <label for="registrationPassword" class="registration-block__text">Пароль</label>
-                            <input type="password" name="password" id="registrationPassword" placeholder="Пароль" required>
+                            <input type="password" name="password" id="registrationPassword" class="registration-block__input" placeholder="Пароль" required>
                         </div>
         
                         <div class="registration-block__item">
                             <label for="registrationSurname" class="registration-block__text">Прізвище</label>
-                            <input type="text" name="surname" id="registrationSurname" placeholder="Прізвище" required>
+                            <input type="text" name="surname" id="registrationSurname" class="registration-block__input" placeholder="Прізвище" required>
                         </div>
         
                         <div class="registration-block__item">
                             <label for="registrationPasswordConfirm" class="registration-block__text">Підтвердіть пароль</label>
-                            <input type="password" name="passwordConfirm" id="registrationPasswordConfirm" placeholder="Підтвердіть пароль" required>
+                            <input type="password" name="passwordConfirm" id="registrationPasswordConfirm" class="registration-block__input" placeholder="Підтвердіть пароль" required>
                         </div>
         
                         <div class="registration-block__item">
                             <label for="registrationEmail" class="registration-block__text">E-mail</label>
-                            <input type="email" name="email" id="registrationEmail" placeholder="E-mail" required>
+                            <input type="email" name="email" id="registrationEmail" class="registration-block__input" placeholder="E-mail" required>
                         </div>
                     </div>
         

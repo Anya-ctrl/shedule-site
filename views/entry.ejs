@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <% include ./partials/header %>
+    <%- include('./partials/header') %>
 
     <main class="main">
-        <section class="entry" id="entry" style="display: none;">
+        <section class="entry" id="entry">
             <div class="container">
                 <h2 class="entry__title">
                     Вхід
@@ -44,9 +44,9 @@
                         </div>
                     </div>
         
-                    <div class="button">
-                        <button type="submit">Увійти</button>
-                    </div>
+                    <button type="submit" class="button">
+                        Увійти
+                    </button>
                 </form>
         
                 <div class="entry__text">Немає облікового запису?

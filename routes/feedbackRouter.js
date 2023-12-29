@@ -1,6 +1,6 @@
-const express = require('express');
-const router = express.Router();
-const Feedback = require('../models/feedback');
+import { Router } from 'express';
+const router = Router();
+import Feedback from '../models/feedback.js';
 
 // Обработка POST запроса с данными отзыва
 router.post('/submit', async (req, res) => {
@@ -18,4 +18,4 @@ router.post('/submit', async (req, res) => {
     }
 });
   
-module.exports = router;
+export default router;

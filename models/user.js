@@ -1,5 +1,6 @@
-const { Sequelize, DataTypes } = require('sequelize');
-require('dotenv').config();
+import { Sequelize, DataTypes } from 'sequelize';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.env.DB_PASSWORD, {
   host: process.env.DB_HOST,
@@ -32,4 +33,4 @@ const User = sequelize.define('user', {
   timestamps: false
 });
 
-module.exports = User;
+export default User;

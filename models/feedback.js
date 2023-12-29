@@ -1,5 +1,6 @@
-const { Sequelize, DataTypes } = require('sequelize');
-require('dotenv').config();
+import { Sequelize, DataTypes } from 'sequelize';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.env.DB_PASSWORD, {
     host: process.env.DB_HOST,
@@ -27,4 +28,4 @@ const Feedback = sequelize.define('Feedback', {
   timestamps: false
 });
   
-module.exports = Feedback;
+export default Feedback;

@@ -33,7 +33,7 @@
                         </div>
                         <div class="select__body">
                             <% faculty.forEach((faculty) => { %>
-                                <div class="select__item"><%= faculty.name %></div>
+                                <div class="select__item" data-faculty-id="<%= faculty.faculty_id %>"><%= faculty.faculty %></div>
                             <% }); %>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="select__body">
                             <% speciality.forEach((speciality) => { %>
-                                <div class="select__item"><%= speciality.name %></div>
+                                <div class="select__item" data-speciality-id="<%= speciality.speciality_id %>"><%= speciality.speciality %></div>
                             <% }); %>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                         </div>
                         <div class="select__body">
                             <% course.forEach((course) => { %>
-                                <div class="select__item"><%= course.name %></div>
+                                <div class="select__item" data-course-id="<%= course.course_id %>"><%= course.course %></div>
                             <% }); %>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                         </div>
                         <div class="select__body">
                             <% group.forEach((group) => { %>
-                                <div class="select__item"><%= group.name %></div>
+                                <div class="select__item" data-group-id="<%= group.group_id %>"><%= group.group_name %></div>
                             <% }); %>
                         </div>
                     </div>

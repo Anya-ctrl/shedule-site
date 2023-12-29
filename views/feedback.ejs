@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <% include ./partials/header %>
+    <%- include('./partials/header') %>
 
     <main class="main">
-        <section class="feedback" id="feedback" style="display: none;">
+        <section class="feedback" id="feedback">
             <div class="container">
                 <h2 class="feedback__title">
                     Напишіть нам
@@ -55,9 +55,9 @@
                         </div> 
                     </div>
         
-                    <div class="button">
-                        <button type="submit">Відправити</button>
-                    </div>
+                    <button type="submit" class="button">
+                        Відправити
+                    </button>
                 </form>
             </div>
         </section>        
