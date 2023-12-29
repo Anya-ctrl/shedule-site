@@ -24,31 +24,41 @@
                 <form id="registrationForm" method="POST" action="/register">
                     <div class="registration-block">
                         <div class="registration-block__item">
-                            <label for="registrationName" class="registration-block__text">Ім’я</label>
-                            <input type="text" name="name" id="registrationName" class="registration-block__input" placeholder="Ім'я" required>
+                            <label for="name" class="registration-block__text">Ім’я</label>
+                            <input type="text" name="name" id="name" class="registration-block__input" placeholder="Ім'я" required value="<%= form.name %>">
                         </div>
         
                         <div class="registration-block__item">
-                            <label for="registrationPassword" class="registration-block__text">Пароль</label>
-                            <input type="password" name="password" id="registrationPassword" class="registration-block__input" placeholder="Пароль" required>
+                            <label for="password" class="registration-block__text">Пароль</label>
+                            <input type="password" name="password" id="password" class="registration-block__input" placeholder="Пароль" required>
                         </div>
         
                         <div class="registration-block__item">
-                            <label for="registrationSurname" class="registration-block__text">Прізвище</label>
-                            <input type="text" name="surname" id="registrationSurname" class="registration-block__input" placeholder="Прізвище" required>
+                            <label for="surname" class="registration-block__text">Прізвище</label>
+                            <input type="text" name="surname" id="surname" class="registration-block__input" placeholder="Прізвище" required value="<%= form.surname %>">>
                         </div>
         
                         <div class="registration-block__item">
-                            <label for="registrationPasswordConfirm" class="registration-block__text">Підтвердіть пароль</label>
-                            <input type="password" name="passwordConfirm" id="registrationPasswordConfirm" class="registration-block__input" placeholder="Підтвердіть пароль" required>
+                            <label for="passwordConfirm" class="registration-block__text">Підтвердіть пароль</label>
+                            <input type="password" name="passwordConfirm" id="passwordConfirm" class="registration-block__input" placeholder="Підтвердіть пароль" required>
                         </div>
         
                         <div class="registration-block__item">
-                            <label for="registrationEmail" class="registration-block__text">E-mail</label>
-                            <input type="email" name="email" id="registrationEmail" class="registration-block__input" placeholder="E-mail" required>
+                            <label for="email" class="registration-block__text">E-mail</label>
+                            <input type="email" name="email" id="email" class="registration-block__input" placeholder="E-mail" required value="<%= form.email %>">>
                         </div>
                     </div>
-        
+
+                    <div class="flash-message">
+                        <% if(errors !== "") { %>
+                            <% errors.forEach((item) => { %>
+                                <div class="alert-danger">
+                                    <%- item%>
+                                </div>
+                            <%})%>
+                        <%}%>
+                    </div>
+
                     <button type="submit" class="button">Зареєструватися</button>
                 </form>
         

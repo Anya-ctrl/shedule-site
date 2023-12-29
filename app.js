@@ -1,55 +1,63 @@
-import { join } from 'path';
-import express, { urlencoded, json } from 'express';
-import serveStatic from 'serve-static'; // Изменим импорт на serve-static
+import { join, dirname } from 'path';
+import express from 'express';
+import { urlencoded, json } from 'express';
+import serveStatic from 'serve-static';
 import Sequelize from 'sequelize';
 import session from 'express-session';
-import indexRouter from './routes/indexRouter.js';
-import userRoutes from './routes/userRoutes.js';
-import feedbackRouter from './routes/feedbackRouter.js';
-import models from './models/index.js'
 import { config as dotenvConfig } from 'dotenv';
-
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import connectFlash from 'connect-flash';
+import cookieParser from 'cookie-parser';
+import indexRouter from './routes/indexRouter.js';
+import models from './models/index.js';
 
+// Constants and configurations
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
-dotenvConfig(); // Используем метод config из пакета dotenv для загрузки переменных окружения
+dotenvConfig();
 
 const {
-    PORT = 3000,
-    DB_DATABASE,
-    DB_USER,
-    DB_PASSWORD,
-    DB_HOST,
-    DB_DIALECT,
-    SESSION_SECRET
+  PORT = 3000,
+  DB_DATABASE,
+  DB_USER,
+  DB_PASSWORD,
+  DB_HOST,
+  DB_DIALECT,
+  SESSION_SECRET
 } = process.env;
 
+// Express app initialization
 const app = express();
 
-// Middleware для разбора URL-кодированных данных (обычно данные формы)
+// Middleware setup
+app.use(cookieParser(SESSION_SECRET));
 app.use(urlencoded({ extended: true }));
-
-// Middleware для разбора JSON-данных
 app.use(json());
 
-// Подключение к базе данных
+// Database connection
 const sequelize = new Sequelize(DB_DATABASE, DB_USER, DB_PASSWORD, {
-    host: DB_HOST,
-    dialect: DB_DIALECT,
+  host: DB_HOST,
+  dialect: DB_DIALECT,
 });
 
-// Middleware для проверки авторизации
-const checkAuth = (req, res, next) => {
-    if (req.session && req.session.isLoggedIn) {
-        res.locals.isLoggedIn = true;
-    } else {
-        res.locals.isLoggedIn = false;
-    }
-    next();
-};
+// Middleware для сессий с использованием MemoryStore для хранения сессий
+app.use(session({
+    secret: SESSION_SECRET,
+    resave: true,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 1000 * 60 * 60 *24 //1 day
+    },
+    store: new session.MemoryStore() // Используем MemoryStore для хранения сессий
+}));
+
+app.use(connectFlash());
+
+app.get('/logout', (req, res) => {
+    console.log('Получен запрос на выход из сессии');
+    req.session.isLoggedIn = false;
+    res.redirect('/');
+});
 
 // Проверка соединения с базой данных
 sequelize
@@ -73,26 +81,11 @@ sequelize.sync({ alter: true })
 // Настройка приложения Express
 app.use(serveStatic(join(__dirname, 'public')));
 app.set('view engine', 'ejs');
-
 app.use('/', indexRouter);
-app.use('/users', userRoutes);
-app.use('/feedback', feedbackRouter);
-
-// Middleware для сессий с использованием MemoryStore для хранения сессий
-app.use(session({
-    secret: SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    store: new session.MemoryStore() // Используем MemoryStore для хранения сессий
-}));
-
-app.use(checkAuth);
 
 // Обработка ошибок 404 (Not Found)
 app.use((req, res, next) => {
-    const error = new Error('Not Found');
-    error.status = 404;
-    next(error);
+    res.status(404).send('404 - Not Found');
 });
 
 // Обработка ошибок сервера 500 (Internal Server Error)

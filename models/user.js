@@ -8,6 +8,14 @@ const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, pr
 });
 
 const User = sequelize.define('user', {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  surname: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -20,17 +28,17 @@ const User = sequelize.define('user', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
+  createdAt: {
+    type: DataTypes.DATE
   },
-  surname: {
-    type: DataTypes.STRING,
-    allowNull: false,
+  updatedAt: {
+    type: DataTypes.DATE
   },
+  deletedAt: {
+    type: DataTypes.DATE
+  }
 }, {
-  tableName: 'user',
-  timestamps: false
+  tableName: '_user',
 });
 
 export default User;

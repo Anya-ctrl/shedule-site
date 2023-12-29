@@ -25,7 +25,4 @@ const Course = sequelize.define('course', {
 
 Course.belongsTo(Group, { foreignKey: 'course_id' });
 
-// Logging
-console.log('Course model defined.');
-
 export default Course;
