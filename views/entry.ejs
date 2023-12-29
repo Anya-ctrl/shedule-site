@@ -24,30 +24,34 @@
                 <form action="/login" method="POST" class="entry-form">
                     <div class="entry-block">
                         <div class="entry-block__item">
-                            <div class="entry-block__text">
-                                E-mail
-                            </div>
-        
-                            <div class="entry-block__input">
-                                <input type="email" name="email" id="entryEmail" placeholder="E-mail" required>
-                            </div>
+                            <label for="email" class="entry-block__text">E-mail</label>
+                            <input type="email" name="email" id="email" class="entry-block__input" placeholder="E-mail" required value="<%= form.email %>">
                         </div>
         
                         <div class="entry-block__item">
-                            <div class="entry-block__text">
-                                Пароль
-                            </div>
-        
-                            <div class="entry-block__input">
-                                <input type="password" name="password" id="entryPassword" placeholder="Пароль" required>
-                            </div>
+                            <label for="password" class="entry-block__text">Пароль</label>
+                            <input type="password" name="password" id="password" class="entry-block__input" placeholder="Пароль" required>
                         </div>
+                    </div>
+
+                    <div class="flash-message">
+                        <% if(errors !== "") { %>
+                            <% errors.forEach((item) => { %>
+                                <div class="alert-danger">
+                                    <%- item%>
+                                </div>
+                            <%})%>
+                        <%}%>
                     </div>
         
                     <button type="submit" class="button">
                         Увійти
                     </button>
                 </form>
+
+                <div class="entry__text">
+                    <a href="/forgot-password">Забули пароль?</a>
+                </div>
         
                 <div class="entry__text">Немає облікового запису?
                     <a href="/registration">Зареєструйтесь.</a>

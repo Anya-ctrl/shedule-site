@@ -3,6 +3,10 @@ const router = Router();
 
 import indexController from '../controllers/indexController.js';
 import auth from "../validation/authValidation.js";
+import initPassportLocal from "../controllers/passport/passportLocal.js";
+import passport from 'passport';
+
+initPassportLocal();
 
 // Логирование для каждого маршрута
 router.get('/', (req, res, next) => {
@@ -40,9 +44,12 @@ router.post('/register', auth.validateRegister, (req, res, next) => {
     indexController.handleRegister(req, res, next);
 });
 
-router.post('/login', (req, res, next) => {
-    console.log('Получен запрос на вход в учетную запись');
-    indexController.handleLogin(req, res, next);
-});
+router.post('/login', passport.authenticate("local", {
+        successRedirect: "/",
+        failureRedirect: "/entry",
+        successFlash: true,
+        failureFlash: true
+    }
+));
 
 export default router;

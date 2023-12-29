@@ -30,8 +30,13 @@ async function getIndexPage(req, res) {
 function getEntryPage(req, res) {
     console.log('Processing request for entry page');
 
+    let form = {
+        email: req.body.email
+    };
+
     res.render('entry', { 
-        
+        errors: req.flash("errors"),
+        form: form
     });
 
     console.log('Entry page request processed and rendered');
@@ -135,31 +140,15 @@ async function handleRegister(req, res) {
 }
 
 
-async function handleLogin(req, res) {
+function handleLogin(req, res) {
     console.log('Processing request for handle Login');
 
-    const { email, password } = req.body;
-
-    try {
-        const user = await models.User.findOne({ where: { email } });
-
-        if (!user) {
-            return res.status(401).send('Неправильный email или пароль');
-        }
-
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-
-        if (!isPasswordValid) {
-            return res.status(401).send('Неправильный email или пароль');
-        }
-
-        req.session.isLoggedIn = true;
-        // Другие действия после успешного входа
-        res.redirect('/'); // Перенаправление на главную страницу
-    } catch (error) {
-        console.error('Ошибка входа:', error);
-        res.status(500).send('Ошибка входа');
+    let user = {
+        email: req.body.email,
+        password: req.body.password
     }
+
+    console.log(user)
 
     console.log('Handle Login request processed');
 }

@@ -7,6 +7,7 @@ import session from 'express-session';
 import { config as dotenvConfig } from 'dotenv';
 import { fileURLToPath } from 'url';
 import connectFlash from 'connect-flash';
+import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import indexRouter from './routes/indexRouter.js';
 import models from './models/index.js';
@@ -81,6 +82,10 @@ sequelize.sync({ alter: true })
 // Настройка приложения Express
 app.use(serveStatic(join(__dirname, 'public')));
 app.set('view engine', 'ejs');
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/', indexRouter);
 
 // Обработка ошибок 404 (Not Found)
