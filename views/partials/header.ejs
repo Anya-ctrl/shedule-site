@@ -2,35 +2,48 @@
     <div class="header-container">
         <div class="header__inner">
             <a href="../" class="logo">
-                <img class="logo__link" src="images/logo.svg" alt="logo">
+                <img class="logo__link" src="/images/logo.svg" alt="logo">
             </a>
+           
             <nav class="menu">
                 <ul class="menu__list">
-                    <li class="menu__item">
-                        <a class="menu__list-link" href="../registration">Реєстрація</a>
-                    </li>
-                    <li class="menu__item">
-                        <a class="menu__list-link" href="../entry">Вхід</a>
-                    </li>
+                    <% if (!auth) { %>    
+                        <li class="menu__item">
+                            <a class="menu__list-link" href="../registration">Реєстрація</a>
+                        </li>
+                        <li class="menu__item">
+                            <a class="menu__list-link" href="../entry">Вхід</a>
+                        </li>
+                    <% } %>
                     <li class="menu__item menu-student">
-                        <img class="menu__list-link" src="images/profile.svg" alt="profile">
-                        <div class="student-menu">
-                            <div class="student-menu__title">Гість</div>
-                            <ul class="student-menu__list">
-                                <li class="student-menu__item">
-                                    <a href="../shedule" class="student-menu__link"><span>Розклад занять</span></a>
-                                </li>
-                                <li class="student-menu__item">
-                                    <a href="../professors" class="student-menu__link"><span>Контакти викладачів</span></a>
-                                </li>
-                                <li class="student-menu__item">
-                                    <a href="../feedback" class="student-menu__link"><span>Служба підтримки</span></a>
-                                </li>
-                            </ul>
-                        </div> 
+                        <img class="menu__list-item" src="/images/profile.svg" alt="profile">
+                        <% if (auth && user.role === "student" && user.groupId) { %>
+                            <div class="student-menu">
+                                <div class="student-menu__title">Студент</div>
+                                    
+                                <ul class="student-menu__list">
+                                    <li class="student-menu__item">
+                                        <a href="<%- '/shedule/' + user.groupId %>" class="student-menu__link" id="studentShedule"><span>Розклад занять</span></a>
+                                    </li>
+                                    <li class="student-menu__item">
+                                        <a href="/professors" class="student-menu__link"><span>Контакти викладачів</span></a>
+                                    </li>
+                                </ul>
+                            </div> 
+                            <div class="student-menu__email"><%- user.email %></div>
+                        <% } else if (auth) {%>
+                            <div class="student-menu__email"><%- user.email %></div>
+                        <% } %>
                     </li>
+                    <% if (auth && user.role === "student" && user.groupId) { %>
+                        <a class="student__link" href="/logout"><img src="/images/logout.svg" alt="Вийти"></a>
+                    <% } else if (auth) {%>
+                        <a class="student__link" href="/logout"><img src="/images/logout.svg" alt="Вийти"></a>
+                    <% } %>
+
                 </ul>  
             </nav>
+            
         </div>
     </div>
 </header>

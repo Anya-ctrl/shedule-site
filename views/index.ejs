@@ -17,77 +17,47 @@
     <main class="main">
         <section class="criteria" id="criteria">
             <div class="container">
+                
                 <h2 class="criteria__title">
                     Оберіть критерії
                 </h2>
         
-                <div class="criteria__selection">
-        
-                    <div class="selection-block" id="facultySelect">
-                        <div class="select__header">
-                            <span class="select__current">Факультет</span>
-                            <button type="button" class="select__icon">
-                                <span></span>
-                                <span></span>
-                            </button>
-                        </div>
-                        <div class="select__body">
-                            <% faculty.forEach((faculty) => { %>
-                                <div class="select__item" data-faculty-id="<%= faculty.faculty_id %>"><%= faculty.faculty %></div>
-                            <% }); %>
-                        </div>
+                <form class="criteria__selection" method="post">
+
+                    <div class="selection-block">
+                        <select class="selection-block__select" name="facultySelect" id="facultySelect">
+                            <option class="selection-block__option" value="" disabled  selected>Выберите факультет</option>
+                        </select>
                     </div>
 
-                    <div class="selection-block" id="specialitySelect">
-                        <div class="select__header">
-                            <span class="select__current">Спеціальність</span>
-                            <button type="button" class="select__icon">
-                                <span></span>
-                                <span></span>
-                            </button>
-                        </div>
-                        <div class="select__body">
-                            <% speciality.forEach((speciality) => { %>
-                                <div class="select__item" data-speciality-id="<%= speciality.speciality_id %>"><%= speciality.speciality %></div>
-                            <% }); %>
-                        </div>
+                    <div class="selection-block">
+                        <select class="selection-block__select" name="facultySelect" id="specialitySelect">
+                            <option class="selection-block__option" value="" disabled  selected>Выберите специальность</option>
+                        </select>
                     </div>
 
-                    <div class="selection-block" id="courseSelect">
-                        <div class="select__header">
-                            <span class="select__current">Курс</span>
-                            <button type="button" class="select__icon">
-                                <span></span>
-                                <span></span>
-                            </button>
-                        </div>
-                        <div class="select__body">
-                            <% course.forEach((course) => { %>
-                                <div class="select__item" data-course-id="<%= course.course_id %>"><%= course.course %></div>
-                            <% }); %>
-                        </div>
+                    <div class="selection-block">
+                        <select class="selection-block__select" name="facultySelect" id="courseSelect">
+                            <option class="selection-block__option" value="" disabled  selected>Выберите курс</option>
+                        </select>
                     </div>
 
-                    <div class="selection-block" id="groupSelect">
-                        <div class="select__header">
-                            <span class="select__current">Група</span>
-                            <button type="button" class="select__icon">
-                                <span></span>
-                                <span></span>
-                            </button>
-                        </div>
-                        <div class="select__body">
-                            <% group.forEach((group) => { %>
-                                <div class="select__item" data-group-id="<%= group.group_id %>"><%= group.group_name %></div>
-                            <% }); %>
-                        </div>
+                    <div class="selection-block">
+                        <select class="selection-block__select" name="facultySelect" id="groupSelect">
+                            <option class="selection-block__option" value="" disabled  selected>Выберите группу</option>
+                        </select>
+                    </div>
+
+                    <div class="button">
+                        <% if (auth) { %>
+                            <a id="scheduleLink" href="#">Перейти до розкладу</a>
+                        <% } else { %> 
+                            <a href="/registration">Перейти до розкладу</a>
+                        <% } %>
                     </div>
         
-                </div>
-        
-                <div class="button">
-                    <a href="/shedule">Перейти до розкладу</a>
-                </div>
+                </form>
+                
             </div>
         </section>
     </main>

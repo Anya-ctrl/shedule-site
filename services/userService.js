@@ -11,8 +11,9 @@ async function createNewUser(user) {
             let salt = bcrypt.genSaltSync(10);
             user.password = bcrypt.hashSync(user.password, salt);
 
-            await models.User.create(user);
-            return 'done';
+            const USER = await models.User.create(user);
+
+            return USER;
         }
     } catch (error) {
         throw error;

@@ -1,4 +1,5 @@
 html{
+    height: 100%;
     box-sizing: border-box;
 }
 
@@ -26,6 +27,7 @@ button {
 }
 
 body{
+    height: 100%;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 24px;
@@ -37,13 +39,24 @@ body{
     background-repeat: no-repeat;
     background-position: bottom;
     background-size: 100vw;
-    height: calc(100vh - 100px);
+    height: 100%;
 }
 
 .container{
     max-width: 920px;
     padding: 0 10px;
     margin: 0 auto;
+}
+
+option{
+    color: #0B5477;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+option:disabled{
+    color: #8481b8;
 }
 
 .button{
@@ -125,11 +138,28 @@ body{
     border-right: none;
 }
 
-.menu__item:not(:last-child) .menu__list-link {
+.student__link {
+    transition: all .5s;
+    color: #fff;
+    font-size: 22px;
+    padding: 2px 15px;
+    border: 1px solid transparent;
+    border-left: 1px solid #fff;
+}
+
+.student__link:hover{
+    border: 1px solid #fff;
+}
+
+.student__link img{
+    height: 40px;
+}
+
+.menu__item:not(:nth-child(3)) .menu__list-link {
     border-right: 1px solid #fff;
 }
 
-.menu__item:not(:last-child) .menu__list-link:hover{
+.menu__item:not(:nth-child(3)) .menu__list-link:hover{
     border: 1px solid #fff;
 }
 
@@ -142,7 +172,7 @@ body{
 .student-menu{
     position: absolute;
     top: 90%;
-    left: -50%;
+    left: 0;
     min-width: 300px;
     background: linear-gradient(90deg, #17577B 0%, #8481B8 47.92%, #BE74B0 100%);
     padding: 8px;
@@ -195,13 +225,18 @@ body{
     border-radius: 0px 0px 30px 30px;
 }
 
-/*************** CRITERIA ***************/
-
-.criteria{
-    padding-top: 140px;
+.student-menu__email {
+    padding: 10px 20px;
 }
 
+.menu__list-item{
+    padding-left: 40px;
+}
+
+/*************** CRITERIA ***************/
+
 .criteria__title{
+    padding-top: 60px;
     background: linear-gradient(91deg, #084467 -0.02%, #D70DB7 99.98%);
     background-clip: text;
     -webkit-background-clip: text;
@@ -212,7 +247,7 @@ body{
 }
 
 .criteria__selection{
-    margin-top: 105px;
+    padding-top: 105px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -220,108 +255,23 @@ body{
 }
 
 .selection-block{
-    margin-bottom: 60px;
+    padding-bottom: 60px;
     width: 35%;
     position: relative;
 }
 
-.select__header{
+.selection-block__select{
+    width: 100%;
     height: 60px;
-    background: linear-gradient(93deg, #0B5477 0%, #B973AE 100%) border-box;
-    padding: 0px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-shrink: 0;
-    cursor: pointer;
-    border-radius: 30px;
-    border: 5px solid transparent;
-}
-
-.selection-block.choosen .select__header {
-    background: linear-gradient(rgba(255, 255, 255, .9), rgba(255, 255, 255, .9)) padding-box, linear-gradient(93deg, #0B5477 0%, #B973AE 100%) border-box;
-}
-
-.selection-block.choosen .select__current {
-    background: linear-gradient(93deg, #0B5477 0%, #B973AE 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-wrap: wrap;
-    font-size: 14px;
-    font-weight: 700;
-    width: 220px;
-}
-
-.select__icon{
-    position: relative;
-    margin-left: auto;
-    width: 20px;
-    height: 20px;
-    transition: transform 1s ease-in-out;
-}
-
-.select__icon span {
-    position: absolute;
-    top: 50%;
-    display: block;
-    width: 10px;
-    height: 2px;
-    background-color: #fff;
-}
-
-.select__icon span:first-child {
-    left: 0;
-    transform: translate(20%, 0) rotate(45deg);
-}
-
-.select__icon span:last-child {
-    right: 0;
-    transform: translate(-20%, 0) rotate(-45deg);
-}
-
-.selection-block.choosen .select__icon span {
-    background: linear-gradient(93deg, #0B5477 0%, #B973AE 100%);
-}
-
-.select__current{
-    font-size: 18px;
-    padding: 8px;
-    color: #fff;
-}
-
-.selection-block.is-active .select__body{
-    opacity: 1;
-    visibility: visible;
-}
-
-.selection-block.is-active .select__icon{
-    transform: rotate(180deg);
-}
-
-.select__body{
-    z-index: 1;
-    opacity: 0;
-    visibility: hidden;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 100%;
-    transition: opacity 1s ease-in-out;
-}
-
-.select__item{
-    padding: 8px 16px;
+    padding: 5px 18px;
+    border-radius: 20px;
     font-size: 16px;
-    cursor: pointer;
-    border: 5px solid transparent;
-    border-radius: 30px;
-    color: #0B5477;
-    background: linear-gradient(rgba(255, 255, 255, .9), rgba(255, 255, 255, .9)) padding-box, linear-gradient(93deg, #0B5477 0%, #B973AE 100%) border-box;
-}
-
-.select__item:hover{
-    background: linear-gradient(rgba(255, 255, 255, .9), rgba(255, 255, 255, .9)) padding-box, linear-gradient(270deg, #0B5477 0%, #B973AE 100%) border-box;
+    background: linear-gradient(93deg, #0B5477 0%, #B973AE 100%);
+    color: white;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    text-wrap: wrap;
 }
 
 /*************** REGISTRATION ***************/
@@ -341,7 +291,7 @@ body{
 }
 
 .registration-block{
-    margin-top: 50px;
+    padding-top: 50px;
     height: 350px;
     display: flex;
     flex-wrap: wrap;
@@ -380,7 +330,7 @@ body{
 }
 
 .registration__text{
-    margin-top: 30px;
+    padding-top: 30px;
     text-align: center;
     color: #ccc;
 }
@@ -394,7 +344,7 @@ body{
 
 .entry__title{
     padding-top: 100px;
-    margin-bottom: 50px;
+    padding-bottom: 50px;
     background: linear-gradient(91deg, #084467 -0.02%, #D70DB7 99.98%);
     background-clip: text;
     -webkit-background-clip: text;
@@ -405,7 +355,7 @@ body{
 }
 
 .entry-block{
-    margin-bottom: 40px;
+    padding-bottom: 40px;
     display: flex;
     flex-wrap: wrap;
     align-content: center;
@@ -413,7 +363,7 @@ body{
 }
 
 .entry-block__item{
-    margin-top: 30px;
+    padding-top: 30px;
     width: 400px;
     display: inline-flex;
     flex-direction: column;
@@ -443,7 +393,7 @@ body{
 }
 
 .entry__text{
-    margin-top: 30px;
+    padding-top: 30px;
     text-align: center;
     color: #ccc;
 }
@@ -467,7 +417,7 @@ body{
 }
 
 .feedback-block{
-    margin-bottom: 70px;
+    padding-bottom: 70px;
     display: flex;
     flex-wrap: wrap;
     align-content: center;
@@ -475,7 +425,7 @@ body{
 }
 
 .feedback-block__item{
-    margin-top: 20px;
+    padding-top: 20px;
     width: 400px;
     display: inline-flex;
     flex-direction: column;
@@ -524,4 +474,96 @@ body{
 .feedback-block__item:last-child .feedback-block__input>input{
     height: 200px;
     text-wrap: wrap;
+}
+
+/*** SHEDULE ***/
+
+.shedule__container{
+    max-width: 1220px;
+    padding: 0 10px;
+    margin: 0 auto;
+}
+
+.shedule__title{
+    padding-top: 60px;
+    padding-bottom: 50px;
+    background: linear-gradient(91deg, #084467 -0.02%, #D70DB7 99.98%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    font-size: 48px;
+    font-weight: 600;
+}
+
+.shedule__table{
+    font-size: 18px;
+    font-weight: 600;
+    background: #ffffff50;
+}
+
+td, th {
+    padding: 5px;
+    border: 2px dashed #084467;
+    background: linear-gradient(91deg, #084467 -0.02%, #D70DB7 99.98%);
+    background-clip: text;
+    width: 16%;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/*** ERROR ***/
+
+.error__title{
+    padding-top: 200px;
+    background: linear-gradient(91deg, #084467 -0.02%, #D70DB7 99.98%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    font-size: 150px;
+}
+
+.error h2{
+    padding-top: 60px;
+    background: linear-gradient(91deg, #084467 -0.02%, #D70DB7 99.98%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    font-size: 48px;
+}
+
+/*** PROFESSORS ***/
+
+.professors__container{
+    max-width: 1220px;
+    padding: 0 10px;
+    margin: 0 auto;
+}
+
+.professors-content__title{
+    padding-top: 80px;
+    padding-bottom: 80px;
+    background: linear-gradient(91deg, #084467 -0.02%, #D70DB7 99.98%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    font-size: 48px;
+}
+
+.professors-content__table {
+    font-size: 18px;
+    font-weight: 600;
+    background: #ffffff50;
+    width: 80%;
+}
+
+.professors-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

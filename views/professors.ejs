@@ -15,9 +15,31 @@
     <%- include('./partials/header') %>
 
     <main class="main">
-      
+        <div class="professors__container">
+            <div class="professors-content">
+                <h2 class="professors-content__title">
+                    Контакти викладачів
+                  </h2>
+          
+                  <table class="professors-content__table">
+                    <thead>
+                      <tr>
+                        <th>ПІБ</th>
+                        <th>Телефон</th>
+                        <th>Zoom</th>
+                      </tr>
+                    </thead>
+                    <% professors.forEach((professor) => { %>
+                        <tr>
+                            <td><%= professor.fullName %></td>
+                            <td><%= professor.phone %></td>
+                            <td><a href="<%= professor.link %>">Посилання</a></td>
+                        </tr>
+                    <% }); %>
+                </table>
+            </div>
+        </div>
     </main>
 
-    <script src="js/main.js"></script>
 </body>
 </html>

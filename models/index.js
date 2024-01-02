@@ -27,5 +27,5 @@ export default {
     Friday,
     Saturday,
     User,
-    Feedback,
+    Feedback
 };
