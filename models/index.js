@@ -11,7 +11,6 @@ import Thursday from './thursday.js';
 import Friday from './friday.js';
 import Saturday from './saturday.js';
 import User from './user.js';
-import Feedback from './feedback.js';
 
 export default {
     Faculty,
@@ -26,6 +25,5 @@ export default {
     Thursday,
     Friday,
     Saturday,
-    User,
-    Feedback
+    User
 };

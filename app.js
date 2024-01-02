@@ -11,11 +11,11 @@ import indexRouter from './routes/indexRouter.js';
 import models from './models/index.js';
 import { error } from 'console';
 
-// Constants and configurations
+// Константи та конфігурації
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Express app initialization
+// Експрес-ініціалізація програми
 const app = express();
 
 // Middleware setup

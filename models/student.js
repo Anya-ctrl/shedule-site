@@ -1,13 +1,9 @@
-import { Sequelize, DataTypes } from 'sequelize';
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/connect.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
 import Group from './group.js';
-
-const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.env.DB_PASSWORD, {
-  host: process.env.DB_HOST,
-  dialect: 'mysql',
-});
 
 const Student = sequelize.define('student', {
     student_id: {
