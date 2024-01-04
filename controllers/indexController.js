@@ -52,6 +52,76 @@ async function getIndexPage(req, res) {
     console.log('Index page request processed and rendered');
 }
 
+async function updateRole(req, res) {
+    const { userId, newRole } = req.body;
+    console.log(userId, newRole)
+    try {
+        await models.User.update({ role: newRole }, { where: { id: userId } });
+
+        // Обновление токена в cookies
+        const token = req.cookies.token;
+        if (token) {
+            let user = getUserFromToken(token);
+            user.role = newRole;
+            res.cookie('token', token);
+        }
+
+        res.redirect('/admin');
+    } catch (error) {
+        console.error('Error updating user role:', error);
+        res.status(500).send('Error updating user role');
+    }
+}
+
+async function getAdminPage(req, res) {
+    console.log('Processing request for admin page');
+
+    if (!res.locals.auth) { return res.redirect('/'); }
+
+    try {
+        let form = {};
+        let user = getUserFromToken(req.cookies.token);
+         
+        if (user && user.role === 'admin') {
+            const users = await models.User.findAll({
+                attributes: ['id', 'name', 'surname', 'email', 'role']
+            });
+
+            const students = await models.Student.findAll();
+            const groups = await models.Group.findAll();
+            const professors = await models.Professor.findAll();    
+            const monday = await models.Monday.findAll();
+            const tuesday = await models.Tuesday.findAll();
+            const wednesday = await models.Wednesday.findAll();
+            const thursday = await models.Thursday.findAll();
+            const friday = await models.Friday.findAll();
+        
+            res.render('admin', {
+                form,
+                auth: res.locals.auth,
+                user,
+                users,
+                students,
+                groups,
+                professors,
+                errors: res.locals.errors,
+                monday,
+                tuesday,
+                wednesday,
+                thursday,
+                friday
+            });
+        } else {
+            res.redirect('/');
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        res.status(500).send('Error fetching data');
+    }
+
+    console.log('Admin page request processed and rendered');
+}
+
 async function compareUserwithStudent(req, res, next) {
     res.locals.user = {};
 
@@ -111,15 +181,14 @@ async function getEntryPage(req, res) {
     console.log('Entry page request processed and rendered');
 }
 
-async function getProfessorsPage(req, res, next) {
+async function getProfessorsPage(req, res) {
     console.log('Processing request for professors page');
 
+    if (!res.locals.auth) { return res.redirect('/entry'); }
+
     const professors = await models.Professor.findAll();
-    console.log(professors[0]);
 
     let user = getUserFromToken(req.cookies.token);
-
-    console.log(user);
 
     res.render('professors', {
         professors,
@@ -127,7 +196,6 @@ async function getProfessorsPage(req, res, next) {
     });
 
     console.log('Professors page request processed and rendered');
-    next();
 }
 
 async function getRegistrationPage(req, res) {
@@ -257,9 +325,6 @@ async function handleLogin(req, res) {
                 res.locals.errors.push(error.msg);
             });
 
-            console.log(res.locals.errors);
-
-
             return res.render('entry', { 
                 errors: res.locals.errors,
                 form: form
@@ -309,14 +374,106 @@ async function handleLogin(req, res) {
 
         res.redirect("/");
     } catch (error) {
-        // errors: res.locals.errors,
-        // form: form
+        res.render('entry', { 
+            errors: res.locals.errors,
+            form: form
+        });
     }
 }
 
 function handleLogout(req, res, next) {
     if (req.cookies.token) return res.clearCookie('token').redirect('/');
     next();
+}
+
+async function handleAddStudent(req, res) {
+    const { name, surname, email, group_id } = req.body;
+
+    let user = getUserFromToken(req.cookies.token);
+
+    try {
+        let form = {
+            name: req.body.name,
+            surname: req.body.surname,
+            email: req.body.email,
+        };
+
+        let validationError = validationResult(req);
+        if(!validationError.isEmpty()) {
+            validationError.array().forEach((error) => {
+                res.locals.errors.push(error.msg);
+            });
+
+            const users = await models.User.findAll({
+                attributes: ['id', 'name', 'surname', 'email', 'role']
+            });
+
+            const students = await models.Student.findAll();
+            const groups = await models.Group.findAll();
+            const professors = await models.Professor.findAll();    
+        
+            return res.render('admin', {
+                form,
+                auth: res.locals.auth,
+                user,
+                users,
+                students,
+                groups,
+                professors,
+                errors: res.locals.errors
+            });
+        };
+
+        await models.Student.create({ name, surname, email, group_id });
+        res.redirect('/admin');
+    } catch (error) {
+        console.error('Error adding student:', error);
+    }
+}
+
+async function handleAddProfessor(req, res) {
+    const { fullName, phone, link } = req.body;
+
+    let user = getUserFromToken(req.cookies.token);
+
+    try {
+        let form = {
+            fullName: req.body.fullName,
+            phone: req.body.phone,
+            link: req.body.link,
+        };
+
+        let validationError = validationResult(req);
+        if(!validationError.isEmpty()) {
+            validationError.array().forEach((error) => {
+                res.locals.errors.push(error.msg);
+            });
+
+            const users = await models.User.findAll({
+                attributes: ['id', 'name', 'surname', 'email', 'role']
+            });
+
+            const students = await models.Student.findAll();
+            const groups = await models.Group.findAll();
+            const professors = await models.Professor.findAll();    
+        
+            return res.render('admin', {
+                form,
+                auth: res.locals.auth,
+                user,
+                users,
+                students,
+                groups,
+                professors,
+                errors: res.locals.errors
+            });
+        };
+
+        await models.Professor.create({ fullName, phone, link });
+        res.redirect('/admin');
+    } catch (error) {
+        console.error('Error adding student:', error);
+    }
 }
 
 function generateJWT(payload){
@@ -349,6 +506,8 @@ function checkAuth(req, res, next){
 export default {
     getIndexPage,
     getEntryPage,
+    updateRole,
+    getAdminPage,
     getProfessorsPage,
     getRegistrationPage,
     getSchedulePage,
@@ -356,5 +515,8 @@ export default {
     handleLogin,
     handleLogout,
     checkAuth,
-    compareUserwithStudent
+    compareUserwithStudent,
+    getUserFromToken,
+    handleAddStudent,
+    handleAddProfessor
 };

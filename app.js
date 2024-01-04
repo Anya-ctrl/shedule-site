@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 
+import indexController from './controllers/indexController.js';
 import sequelize from './config/connect.js';
 import configEnv from "./config/db.config.js"
 import indexRouter from './routes/indexRouter.js';
@@ -64,22 +65,26 @@ process.on('SIGINT', () => {
 });
 
 // Обработка ошибки 404 - не найдено
-app.use((req, res, next) => {
+app.use(indexController.checkAuth, (req, res, next) => {
+    let user = indexController.getUserFromToken(req.cookies.token);
+
     const error = {
         message: 'Страница не найдена'
     };
-    res.status(404).render('404', { error });
+    res.status(404).render('404', { error, user });
 });
 
 // Обработка ошибки 500 и других внутренних ошибок
-app.use((err, req, res, next) => {
+app.use(indexController.checkAuth, (err, req, res, next) => {
     console.error(err.stack);
+
+    let user = indexController.getUserFromToken(req.cookies.token);
 
     const error = {
         message: 'Что-то пошло не так на сервере' 
     };
 
-    res.status(err.status || 500).render('404', { error });
+    res.status(err.status || 500).render('404', { error, user });
 });
 
 

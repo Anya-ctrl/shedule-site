@@ -22,7 +22,25 @@ let validateLogin = [
     body('password', 'Invalid password. Password must be at least 6 chars long').isLength({min: 6})
 ];
 
+let validadateAddStudent = [
+    function(req, res, next) {  
+        res.locals.errors = [];
+        next();
+    },
+    body('email', 'Invlid email').isEmail().trim()
+];
+
+let validadateAddProfessor = [
+    function(req, res, next) {  
+        res.locals.errors = [];
+        next();
+    },
+    body('phone').notEmpty().withMessage('Введите номер телефона').matches(/^(?:\+380|380|0)\d{9}$/).withMessage('Введите корректный номер телефона'),
+];
+
 export default {
     validateRegister,
-    validateLogin
+    validateLogin,
+    validadateAddStudent,
+    validadateAddProfessor
 }

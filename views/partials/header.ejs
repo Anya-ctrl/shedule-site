@@ -7,6 +7,11 @@
            
             <nav class="menu">
                 <ul class="menu__list">
+                    <% if (auth && user && user.role === "admin") { %>
+                        <a href="../professors" class="admin-menu__link"><span>Контакти викладачів</span></a>
+                        <a href="../admin" class="admin-menu__link"><span>Адмін панель</span></a>
+                    <% } %>
+                    
                     <% if (!auth) { %>    
                         <li class="menu__item">
                             <a class="menu__list-link" href="../registration">Реєстрація</a>
@@ -17,7 +22,7 @@
                     <% } %>
                     <li class="menu__item menu-student">
                         <img class="menu__list-item" src="/images/profile.svg" alt="profile">
-                        <% if (auth && user.role === "student" && user.groupId) { %>
+                        <% if (user && auth && user.role === "student" && user.groupId) { %>
                             <div class="student-menu">
                                 <div class="student-menu__title">Студент</div>
                                     
@@ -30,7 +35,7 @@
                                     </li>
                                 </ul>
                             </div> 
-                            <div class="student-menu__email"><%- user.email %></div>
+                            <div class="student-menu__email"><%- user.email %></div>          
                         <% } else if (auth) {%>
                             <div class="student-menu__email"><%- user.email %></div>
                         <% } %>
